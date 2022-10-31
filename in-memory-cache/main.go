@@ -20,8 +20,6 @@ type Todo struct {
 //I am trying to cache the response of the API call. I am using the ttlcache package. I am able to cache the response but I am not able to get the cached response. I am getting the response from the API call. I am not sure what I am doing wrong. I am new to Go and Fiber. Any help would be appreciated.
 var cache ttlcache.SimpleCache = ttlcache.NewCache()
 
-
-
 func main() {
 	app := fiber.New()
 	var notFound = ttlcache.ErrNotFound
@@ -52,10 +50,6 @@ func main() {
 		}
 		return c.JSON(fiber.Map{"cache-data": val})
 	})
-
-
-
-
 
 	app.Listen(":3000")
 }
