@@ -22,7 +22,6 @@ var cache ttlcache.SimpleCache = ttlcache.NewCache()
 
 func main() {
 	app := fiber.New()
-	var notFound = ttlcache.ErrNotFound
 
 	cache.SetTTL(10*time.Second)
 	
@@ -33,7 +32,7 @@ func main() {
 	app.Get("/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
 		val, err := cache.Get(id)
-		if err != notFound {	
+		if err != nil {	
 			var todo Todo
 			response, err := http.Get("https://jsonplaceholder.typicode.com/todos/" + id)
 			if err != nil {
